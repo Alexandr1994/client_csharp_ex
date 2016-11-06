@@ -9,7 +9,10 @@ namespace WebProject
 {
     class TokenHelper
     {
-
+        /// <summary>
+        /// Получить сохраненный токен
+        /// </summary>
+        /// <returns></returns>
         public static string LoadToken()
         {
             StreamReader reader = new StreamReader("token");
@@ -18,6 +21,10 @@ namespace WebProject
             return token;
         }
 
+        /// <summary>
+        /// Сохранить токен
+        /// </summary>
+        /// <param name="token">Токен</param>
         public static void SaveToken(string token)
         {
             DeleteToken();
@@ -26,6 +33,9 @@ namespace WebProject
             writer.Close();
         }
 
+        /// <summary>
+        /// Удалить сохраненный токен
+        /// </summary>
         public static void DeleteToken()
         {
             if (File.Exists("token"))
