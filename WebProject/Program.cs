@@ -16,16 +16,12 @@ namespace WebProject
         [STAThread]
         static void Main()
         {
-            string token = "";
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             try
             {
-                StreamReader reader = new StreamReader("token");
-                token = reader.ReadToEnd();
-                reader.Close();
                 Dictionary<string, string> args = new Dictionary<string, string>();
-                args["token"] = token;
+                args["token"] = TokenHelper.LoadToken();
                 Http http = new Http();
                 args = http.PostRequest("user", args);
                 if (args["code"] == "200")

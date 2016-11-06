@@ -45,15 +45,13 @@ namespace WebProject
                 Dictionary<string, string> args = new Dictionary<string, string>();
                 args["login"] = login_field.Text;
                 args["password"] = password_field.Text;
-                args = http.PostRequest("login", args);
+                args = http.PostRequest("account/login", args);
                 if (args["code"] != "200")
                 {
                     MessageBox.Show("Error!\n" + args["message"]);
                     return;
                 }
-                StreamWriter writer = new StreamWriter("token");
-                writer.Write(args["token"]);
-                writer.Close();
+                TokenHelper.SaveToken(args["token"]);
                 this.AppStart();
             }
             catch (Exception)

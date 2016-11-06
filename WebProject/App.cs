@@ -18,5 +18,25 @@ namespace WebProject
             InitializeComponent();
             this.Visible = true;
         }
+
+        private void logout_btn_Click(object sender, EventArgs e)
+        {
+            Dictionary<string, string> args = new Dictionary<string, string>();
+            Http http = new Http();
+            args["token"] = TokenHelper.LoadToken();
+            try
+            {
+                args = http.PostRequest("account/logout", args);
+                if(args["code"] == "200")
+                {
+                    TokenHelper.DeleteToken();
+                    Application.Restart();
+                }
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("ERROR!");
+            }
+        }
     }
 }

@@ -37,14 +37,32 @@ namespace WebProject
                 args["surname"] = surname_field.Text;
                 args["login"] = login_field.Text;
                 args["password"] = password_field.Text;
-                args = http.PostRequest("register", args);
-
-                MessageBox.Show("Error!\n" + args["message"]);
+                args = http.PostRequest("account/register", args);
+                if (args["code"] != "200")
+                {
+                    MessageBox.Show("Error!\n" + args["message"]);
+                    return;
+                }
+                TokenHelper.SaveToken(args["token"]);
+                this.AppStart();
             }
             catch (Exception)
             {
                 MessageBox.Show("ERROR!");
             }
+        }
+
+        private void AppStart()
+        {
+            this.Visible = false;
+            App app = new App();
+            app.Closed += onAppClose;
+            app.Show();
+        }
+
+        private void onAppClose(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
