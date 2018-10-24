@@ -6,18 +6,21 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using WebProject.Objects;
 
-namespace WebProject
+namespace WebProject.Core
 {
     class Http
     {
+        private string host = "http://web_omstu-borntokill1361002.codeanyapp.com/";
+
         /// <summary>
         /// HTTP-запрос на сервер методом POST
         /// </summary>
         /// <param name="url">URI</param>
         /// <param name="data">Данные для передачи на сервер (в теле запроса)</param>
         /// <returns>Ответ</returns>
-        public Dictionary<string, string> PostRequest(string url, Dictionary<string, string> data)
+        public ResponseObject PostRequest(string url, RequestObject data)
         {
             return this.DoRequest(url, "POST", data);
         }
@@ -28,13 +31,24 @@ namespace WebProject
         /// <param name="url">URI</param>
         /// <param name="data">Данные для передачи на сервер (в строке запроса)</param>
         /// <returns>Ответ</returns>
-        public Dictionary<string, string> GetRequest(string url, List<string> data)
+        public ResponseObject GetRequest(string url, Dictionary<string, string> data)
         {
-            foreach(string part in data)
+            //GET data
+            if(data.Count > 0)
             {
-                url += "/" + part;
+                url += "?";
+                int index = 0;
+                foreach (KeyValuePair<string, string> part in data)
+                {
+                    if (index > 0)
+                    {
+                        url += "&";
+                    }
+                    url += part.Key + "=" + part.Value;
+                    index++;
+                }
             }
-            return this.DoRequest(url, "GET", new Dictionary<string, string>());
+            return this.DoRequest(url, "GET");
         }
 
         /// <summary>
@@ -44,17 +58,22 @@ namespace WebProject
         /// <param name="method">Метод запроса</param>
         /// <param name="data">Данные для передачи на сервер</param>
         /// <returns></returns>
-        private Dictionary<string, string> DoRequest(string url, string method, Dictionary<string, string> data)
+        private ResponseObject DoRequest(string url, string method, RequestObject data = null)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://php_container-borntokill1361002.codeanyapp.com/" + url);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(host + url);
             request.ContentType = "application/json";
             request.Method = method;
-            Stream stream = request.GetRequestStream();
-            string temp = JsonConvert.SerializeObject(data);
-            foreach (char part in temp)
+            Stream stream;
+            //request data
+            if (data != null)
             {
-                stream.WriteByte((byte)part);
-            }
+                stream = request.GetRequestStream();
+                string temp = JsonConvert.SerializeObject(data);
+                foreach (char part in temp)
+                {
+                    stream.WriteByte((byte)part);
+                }
+            }//response
             HttpWebResponse responce = (HttpWebResponse)request.GetResponse();
             stream = responce.GetResponseStream();
             string respStr = "";
@@ -67,7 +86,7 @@ namespace WebProject
                 }
                 respStr += (char)part;
             }
-            return JsonConvert.DeserializeObject<Dictionary<string, string>>(respStr);;
+            return JsonConvert.DeserializeObject<ResponseObject>(respStr);;
         }
     }
 }

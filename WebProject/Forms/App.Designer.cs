@@ -1,4 +1,4 @@
-﻿namespace WebProject
+﻿namespace WebProject.Forms
 {
     partial class App
     {
@@ -33,10 +33,10 @@
             // 
             // logout_btn
             // 
-            this.logout_btn.Location = new System.Drawing.Point(82, 28);
+            this.logout_btn.Location = new System.Drawing.Point(12, 12);
             this.logout_btn.Name = "logout_btn";
-            this.logout_btn.Size = new System.Drawing.Size(115, 38);
-            this.logout_btn.TabIndex = 0;
+            this.logout_btn.Size = new System.Drawing.Size(260, 66);
+            this.logout_btn.TabIndex = 1;
             this.logout_btn.Text = "logout";
             this.logout_btn.UseVisualStyleBackColor = true;
             this.logout_btn.Click += new System.EventHandler(this.logout_btn_Click);
@@ -48,6 +48,9 @@
             this.ClientSize = new System.Drawing.Size(284, 90);
             this.Controls.Add(this.logout_btn);
             this.Name = "App";
+            this.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.RightToLeftLayout = true;
+            this.Tag = "Application";
             this.Text = "Application";
             this.ResumeLayout(false);
 

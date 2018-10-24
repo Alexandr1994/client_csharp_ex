@@ -9,8 +9,10 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WebProject.Objects;
+using WebProject.Core;
 
-namespace WebProject
+namespace WebProject.Forms
 {
     public partial class Login : Form
     {
@@ -42,16 +44,16 @@ namespace WebProject
             try
             {
                 Http http = new Http();
-                Dictionary<string, string> args = new Dictionary<string, string>();
-                args["login"] = login_field.Text;
-                args["password"] = password_field.Text;
-                args = http.PostRequest("account/login", args);
-                if (args["code"] != "200")
+                RequestObject args = new RequestObject();
+                args.data.Add("login", login_field.Text);
+                args.data.Add("password", password_field.Text);
+                ResponseObject result = http.PostRequest("api/login", args);
+                if (result.success != 1)
                 {
-                    MessageBox.Show("Error!\n" + args["message"]);
+                    MessageBox.Show("Error!\n" + result.error["message"]);
                     return;
                 }
-                TokenHelper.SaveToken(args["token"]);
+                TokenHelper.SaveToken(result.data["token"]);
                 this.AppStart();
             }
             catch (Exception)

@@ -5,6 +5,9 @@ using System.Linq;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WebProject.Objects;
+using WebProject.Forms;
+using WebProject.Core;
 
 namespace WebProject
 {
@@ -20,11 +23,11 @@ namespace WebProject
             Application.SetCompatibleTextRenderingDefault(false);
             try
             {
-                Dictionary<string, string> args = new Dictionary<string, string>();
-                args["token"] = TokenHelper.LoadToken();
+                RequestTokenObject args = new RequestTokenObject();
+                args.token = TokenHelper.LoadToken();
                 Http http = new Http();
-                args = http.PostRequest("user", args);
-                if (args["code"] == "200")
+                ResponseObject result = http.PostRequest("api/user", args);
+                if (result.success == 1)
                 {
                     Application.Run(new App());
                 }
@@ -33,11 +36,10 @@ namespace WebProject
                     Application.Run(new Login());
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 Application.Run(new Login());
             }
-            
         }
     }
 }

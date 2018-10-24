@@ -1,4 +1,4 @@
-﻿namespace WebProject
+﻿namespace WebProject.Forms
 {
     partial class Login
     {
@@ -38,17 +38,17 @@
             // 
             // reg_btn
             // 
-            this.reg_btn.Location = new System.Drawing.Point(66, 179);
+            this.reg_btn.Location = new System.Drawing.Point(67, 136);
             this.reg_btn.Name = "reg_btn";
             this.reg_btn.Size = new System.Drawing.Size(122, 31);
-            this.reg_btn.TabIndex = 0;
+            this.reg_btn.TabIndex = 4;
             this.reg_btn.Text = "Register";
             this.reg_btn.UseVisualStyleBackColor = true;
             this.reg_btn.Click += new System.EventHandler(this.btn_Click);
             // 
             // login_field
             // 
-            this.login_field.Location = new System.Drawing.Point(90, 40);
+            this.login_field.Location = new System.Drawing.Point(91, 25);
             this.login_field.Name = "login_field";
             this.login_field.Size = new System.Drawing.Size(129, 20);
             this.login_field.TabIndex = 1;
@@ -56,28 +56,28 @@
             // 
             // login_btn
             // 
-            this.login_btn.Location = new System.Drawing.Point(66, 131);
+            this.login_btn.Location = new System.Drawing.Point(67, 99);
             this.login_btn.Name = "login_btn";
             this.login_btn.Size = new System.Drawing.Size(122, 31);
-            this.login_btn.TabIndex = 2;
+            this.login_btn.TabIndex = 3;
             this.login_btn.Text = "Login";
             this.login_btn.UseVisualStyleBackColor = true;
             this.login_btn.Click += new System.EventHandler(this.login_btn_Click);
             // 
             // password_field
             // 
-            this.password_field.Location = new System.Drawing.Point(90, 79);
+            this.password_field.Location = new System.Drawing.Point(91, 61);
             this.password_field.Name = "password_field";
             this.password_field.PasswordChar = '*';
             this.password_field.Size = new System.Drawing.Size(129, 20);
-            this.password_field.TabIndex = 3;
+            this.password_field.TabIndex = 2;
             this.password_field.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.password_field.UseSystemPasswordChar = true;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 43);
+            this.label1.Location = new System.Drawing.Point(29, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(36, 13);
             this.label1.TabIndex = 4;
@@ -86,7 +86,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(28, 82);
+            this.label2.Location = new System.Drawing.Point(29, 64);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 5;
@@ -96,7 +96,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(248, 231);
+            this.ClientSize = new System.Drawing.Size(248, 178);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.password_field);
